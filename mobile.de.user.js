@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Mobile.de
 // @namespace    https://www.mobile.de/
-// @version      0.1
+// @version      0.1.1
 // @description  Hide unwanted ads
 // @author       Eros Nicolau
 // @match        *.mobile.de/*
@@ -14,7 +14,7 @@
     let ls = window.localStorage
 
     // Add the hide icons to the listing ads
-    let cadAds = document.querySelectorAll('.dealerAd')
+    let cadAds = document.querySelectorAll('.dealerAd, .fsboAd')
     cadAds.length > 0 && [...cadAds].map(e => {
         let id = e.querySelector('[data-ad-id]').getAttribute('data-ad-id')
         console.log(e, id)
