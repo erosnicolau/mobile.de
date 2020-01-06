@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Mobile.de
 // @namespace    https://www.mobile.de/
-// @version      0.1.1
+// @version      0.1.2
 // @description  Hide unwanted ads
 // @author       Eros Nicolau
 // @match        *.mobile.de/*
@@ -17,7 +17,6 @@
     let cadAds = document.querySelectorAll('.dealerAd, .fsboAd')
     cadAds.length > 0 && [...cadAds].map(e => {
         let id = e.querySelector('[data-ad-id]').getAttribute('data-ad-id')
-        console.log(e, id)
         addMonkey(e, id)
     })
 
@@ -28,8 +27,8 @@
     let currentCars = JSON.parse(ls.getItem("Hidden Cars")) || [];
     if (currentCars.length > 0) {
         currentCars.map(c => {
-            let that = document.querySelector('[data-hiddenid="'+c+'"]')
-            that && toggleCar(that, [...that.classList].includes('hiddenButton'))
+            let that = document.querySelectorAll('[data-hiddenid="'+c+'"]')
+            that.length > 0 && [...that].map(el => toggleCar(el, [...el.classList].includes('hiddenButton')))
         })
     }
 
@@ -42,9 +41,7 @@
         link.innerText = '🙈'
         link.addEventListener("click", function(el){
             el.preventDefault()
-            console.log(el)
             let that = el.target.closest('.hideMe')
-            console.log(that)
             toggleCar(that, [...that.classList].includes('hiddenButton'))
         }, false);
     }
